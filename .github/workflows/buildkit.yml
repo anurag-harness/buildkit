@@ -44,22 +44,7 @@ jobs:
         id: prep
         run: |
           TAG=pr
-          PUSH=false
-          if [ "${{ github.event_name }}" = "schedule" ]; then
-            TAG=nightly
-            PUSH=push
-          elif [[ $GITHUB_REF == refs/tags/v* ]]; then
-            TAG=${GITHUB_REF#refs/tags/}
-            PUSH=push
-          elif [[ $GITHUB_REF == refs/heads/* ]]; then
-            TAG=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g')
-            if [ $GITHUB_REF = "refs/heads/${{ github.event.repository.default_branch }}" ]; then
-              PUSH=push
-            fi
-          fi
-          if [ "$GITHUB_REPOSITORY" != "moby/buildkit" ]; then
-            PUSH=false
-          fi
+          PUSH=push
           echo "tag=${TAG}" >>${GITHUB_OUTPUT}
           echo "push=${PUSH}" >>${GITHUB_OUTPUT}
           platforms=$(docker buildx bake release --print | jq -cr '.target."release".platforms')
