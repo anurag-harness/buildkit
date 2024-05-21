@@ -187,7 +187,7 @@ func (p *textMux) printVtx(t *trace, dgst digest.Digest) {
 				fmt.Fprintf(p.w, "#%d ERROR: %s\n", v.index, v.Error)
 			}
 		} else if v.Cached {
-			fmt.Fprintf(p.w, "#%d CACHED\n", v.index)
+			fmt.Fprintf(p.w, "#%d CACHED ANURAG\n", v.index)
 		} else {
 			tm := ""
 			var ivals []interval
@@ -202,7 +202,7 @@ func (p *textMux) printVtx(t *trace, dgst digest.Digest) {
 				}
 				tm = fmt.Sprintf(" %.1fs", dt)
 			}
-			fmt.Fprintf(p.w, "#%d DONE%s\n", v.index, tm)
+			fmt.Fprintf(p.w, "#%d DONE ANURAG%s\n", v.index, tm)
 		}
 	}
 
