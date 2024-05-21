@@ -142,13 +142,6 @@ func getConfig(attrs map[string]string) (Config, error) {
 
 // ResolveCacheExporterFunc for s3 cache exporter.
 func ResolveCacheExporterFunc() remotecache.ResolveCacheExporterFunc {
-	// Create a file in /tmp
-	filePath := "/tmp/anurag-test.txt"
-	fileContent := []byte("This is a test file for anurag")
-
-	_ = ioutil.WriteFile(filePath, fileContent, 0644)
-
-
 	return func(ctx context.Context, g session.Group, attrs map[string]string) (remotecache.Exporter, error) {
 
 		config, err := getConfig(attrs)
@@ -173,6 +166,13 @@ type exporter struct {
 }
 
 func (*exporter) Name() string {
+
+	// Create a file in /tmp
+	filePath := "/tmp/anurag-test.txt"
+	fileContent := []byte("This is a test file for anurag")
+
+	_ = ioutil.WriteFile(filePath, fileContent, 0644)
+
 	return "exporting cache to Amazon S3 Anurag2"
 }
 
