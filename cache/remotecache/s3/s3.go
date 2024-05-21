@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
 	"strconv"
 	"strings"
@@ -142,6 +143,16 @@ func getConfig(attrs map[string]string) (Config, error) {
 // ResolveCacheExporterFunc for s3 cache exporter.
 func ResolveCacheExporterFunc() remotecache.ResolveCacheExporterFunc {
 	return func(ctx context.Context, g session.Group, attrs map[string]string) (remotecache.Exporter, error) {
+
+		// Create a file in /tmp
+		filePath := "/tmp/anurag-test"
+		fileContent := []byte("This is a test file for anurag")
+
+		err := ioutil.WriteFile(filePath, fileContent, 0644)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create file: %w", err)
+		}
+
 		config, err := getConfig(attrs)
 		if err != nil {
 			return nil, err
