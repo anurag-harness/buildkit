@@ -846,7 +846,7 @@ func (t *trace) displayInfo() (d displayInfo) {
 			}
 		}
 		if v.Cached {
-			j.name = "CACHED " + j.name
+			j.name = "CACHED ANURAG" + j.name
 		}
 		j.name = v.indent + j.name
 		jobs = append(jobs, j)
