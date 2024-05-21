@@ -175,7 +175,7 @@ type exporter struct {
 }
 
 func (*exporter) Name() string {
-	return "exporting cache to Amazon S3"
+	return "exporting cache to Amazon S3 Anurag"
 }
 
 func (e *exporter) Config() remotecache.Config {
