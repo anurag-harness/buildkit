@@ -165,15 +165,22 @@ type exporter struct {
 	config   Config
 }
 
-func (*exporter) Name() string {
-
+func (e *exporter) Name() string {
 	// Create a file in /tmp
 	filePath := "/tmp/anurag-test.txt"
 	fileContent := []byte("This is a test file for anurag")
 
 	_ = ioutil.WriteFile(filePath, fileContent, 0644)
 
-	return "exporting cache to Amazon S3 Anurag2"
+	// Get the current working directory
+	pwd, err := os.Getwd()
+	if err != nil {
+		fmt.Println("Error getting the current working directory:", err)
+		return "exporting cache to Amazon S3 Anurag2"
+	}
+
+	// Append the current working directory to the return message
+	return "exporting cache to Amazon S3 Anurag2, PWD: " + pwd
 }
 
 func (e *exporter) Config() remotecache.Config {
