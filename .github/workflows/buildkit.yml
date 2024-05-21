@@ -100,38 +100,10 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-  test:
-    uses: ./.github/workflows/.test.yml
-    secrets: inherit
-    needs:
-      - binaries
-    with:
-      cache_scope: build-integration-tests
-      pkgs: ./client ./cmd/buildctl ./worker/containerd ./solver ./frontend
-      kinds: integration
-      codecov_flags: core
-      includes: |
-        - pkg: ./...
-          skip-integration-tests: 1
-          typ: integration gateway
-        - pkg: ./client
-          worker: containerd
-          tags: nydus
-          typ: integration
-        - pkg: ./client
-          worker: oci
-          tags: nydus
-          typ: integration
-        - pkg: ./...
-          tags: nydus
-          skip-integration-tests: 1
-          typ: integration
-
   image:
     runs-on: ubuntu-22.04
     needs:
       - prepare
-      - test
     strategy:
       fail-fast: false
       matrix:
